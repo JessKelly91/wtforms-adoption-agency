@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+
+{% block title %} Pet Home {% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="row">
+        {% for pet in pets %}
+        <div class="col">
+            <a href="/{{pet.id}}">
+                <img id="pet_photo" src="{{pet.photo_url}}" class="img-thumbnail" alt="{{pet.name}}'s photo">
+            </a>
+            <p>{{pet.name}} is
+                {% if pet.available %}
+                    <b>Available!</b>
+                {% else %}
+                    <b>Unavailable</b>
+            {% endif %}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+        <a href="/add" class="btn btn-info" role="button">Add a Pet</a>
+
+</div>
+
+{% endblock %}

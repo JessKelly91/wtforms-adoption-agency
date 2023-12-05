@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{pet.name}}
+{% endblock %}
+
+{% block body %}
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <div class="mb-3">
+                <img id="profile-image" class="img-thumbnail" src="{{pet.photo_url}}" alt="{{pet.name}}'s profile image">
+            </div>
+        </div>
+        <div class="col">
+            <h1>{{pet.name}}</h1>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+
+            <ul class="list-group list-group-flush">
+                {%if pet.age%} 
+                <li class="list-group-item">Age: {{pet.age}}</li>
+                {% endif %}
+
+                <li class="list-group-item">Species: {{pet.species}}</li>
+                
+                {%if pet.notes%}
+                <li class="list-group-item">Notes {{pet.notes}}</li>
+                {% endif %}
+            </ul>
+            <div class="profile-buttons mb-3">
+                <a class="btn btn-primary" href="/{{pet.id}}/edit" role="button">Edit Pet</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+    
+
+{% endblock %}
